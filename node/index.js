@@ -5,7 +5,8 @@ const config = {
     host: 'mysql',
     user: 'root',
     password: 'root',
-    database: 'nodedb'
+    database: 'nodedb',
+    port: '3306'
 }
 
 const mysql = require('mysql')
