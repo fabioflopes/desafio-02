@@ -10,8 +10,6 @@ services:
       - ./node:/usr/src/app
     container_name: app
     tty: true
-    # ports:
-    #   - "3000:3000"
 
   nginx:
     build:
@@ -31,11 +29,13 @@ services:
     container_name: mysql
     restart: always
     tty: true
+    expose:
+      - "3306"
     volumes: 
       - ./mysql:/var/lib/mysql
+      - ./db_scripts:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_DATABASE=nodedb
-      - MYQL_USER=root
       - MYSQL_ROOT_PASSWORD=root
     networks: 
       - nodenet
