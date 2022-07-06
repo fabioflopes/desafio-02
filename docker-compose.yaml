@@ -8,8 +8,11 @@ services:
       - nodenet
     volumes:
       - ./node:/usr/src/app
+      - /usr/src/app/node_modules
     container_name: app
     tty: true
+    expose:
+      - "80"
 
   nginx:
     build:
