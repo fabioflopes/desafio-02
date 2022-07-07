@@ -14,10 +14,9 @@ services:
       dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh node index.js
     tty: true
     expose:
-      - "80"
+      - "3000"
     depends_on:
       - db
-
 
   nginx:
     build:
@@ -28,8 +27,12 @@ services:
       - ./nginx:/usr/src/nginx
     container_name: nginx
     tty: true
+    entrypoint:
+      dockerize -wait tcp://app:3000 -timeout 20s docker-entrypoint.sh nginx -g 'daemon off;'
     ports:
       - "8080:8080"
+    depends_on:
+      - app
 
   db:
     image: mysql:5.7
